@@ -46,7 +46,11 @@ impl Opener for File<fs::File> {
             .unwrap_or_default()
             .to_string_lossy()
             .to_string();
-        let stream = fs::File::open(path)?;
+        let stream = fs::OpenOptions::new()
+            .create(true)
+            .read(true)
+            .write(true)
+            .open(path)?;
 
         Ok(Self { name, stream })
     }
