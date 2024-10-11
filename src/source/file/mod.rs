@@ -47,8 +47,8 @@ impl Opener for File<fs::File> {
             .to_string_lossy()
             .to_string();
         let stream = fs::OpenOptions::new()
-            .create(true)
             .read(true)
+            .truncate(true)
             .write(true)
             .open(path)?;
 
